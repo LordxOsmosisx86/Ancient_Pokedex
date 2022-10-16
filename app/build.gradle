@@ -43,7 +43,11 @@ dependencies {
     def GSON_version = "2.9.0"
     def lifecycle_version = "2.5.1"
     def okhttp_version = "4.10.0"
+    def paging_version = "3.1.1"
 
+
+    //Paging
+    implementation "androidx.paging:paging-runtime:$paging_version"
     //GSON
     implementation "com.squareup.retrofit2:converter-gson:$GSON_version"
     //Retrofit
