@@ -1,2 +1,2 @@
 # Ancient_Pokedex
-A pokedex with Hisui-style formatting. 
+Programmed as a native android application, this project is a pokedex with Hisui-style formatting. 
