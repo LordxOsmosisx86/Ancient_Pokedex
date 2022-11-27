@@ -2,47 +2,51 @@ package com.example.ancient_pokedex
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.liveData
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.get
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.PagingData
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.ancient_pokedex.databinding.ActivityMainBinding
-import com.example.ancient_pokedex.interfaces.PokemonService
-import com.example.ancient_pokedex.model.Pokemon
-import com.example.ancient_pokedex.model.Result
-import com.example.ancient_pokedex.model.RetrofitInstance
-import retrofit2.Response
+import com.example.ancient_pokedex.paging.PokemonPagingAdapter
+import com.example.ancient_pokedex.ui.PokemonViewModel
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var mAdapter: PokemonPagingAdapter
+    private val viewModel: PokemonViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        val retrofitService =RetrofitInstance
-            .getRetrofitInstance()
-            .create(PokemonService::class.java)
-        var responseLiveData: LiveData<Response<Pokemon>> = liveData {
-            var i = 0
-            var response = retrofitService.getNextPage(i)
-            while(response.body()?.next?.isNotEmpty() == true) {
-                emit(response)
-                i+=20
-                response = retrofitService.getNextPage(i)
+        setContentView(binding.root)
+
+        setupRv()
+        loadingData()
+    }
+
+    private fun loadingData() {
+        lifecycleScope.launch{
+            viewModel.listData.collect{ pagingData->
+                mAdapter.submitData(pagingData)
             }
         }
-        responseLiveData.observe(this) {
-            val pokemon = it.body()?.results
-            val iterator = pokemon?.listIterator()
-            if (iterator!= null) {
-                while (iterator.hasNext()) {
-                    val pkm = iterator.next()
-                    val result = " " + "Pokemon Name: ${pkm.name}" + "\n\n"
-                    binding.textView.append(result)
-                }
-            }
-            else
-                Log.i("Hourani", "No Data")
+    }
+
+    private fun setupRv(){
+        mAdapter = PokemonPagingAdapter()
+        binding.recyclerView.apply {
+            layoutManager = StaggeredGridLayoutManager(
+                2, StaggeredGridLayoutManager.VERTICAL
+            )
+
+            adapter = mAdapter
+            setHasFixedSize(true)
+
+
         }
     }
 }
