@@ -12,8 +12,9 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.ancient_pokedex.databinding.ActivityMainBinding
 import com.example.ancient_pokedex.paging.PokemonPagingAdapter
 import com.example.ancient_pokedex.ui.PokemonViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var mAdapter: PokemonPagingAdapter
