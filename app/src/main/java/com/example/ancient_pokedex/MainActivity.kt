@@ -3,11 +3,7 @@ package com.example.ancient_pokedex
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import androidx.lifecycle.lifecycleScope
-import androidx.paging.PagingData
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.ancient_pokedex.databinding.ActivityMainBinding
 import com.example.ancient_pokedex.paging.PokemonPagingAdapter
@@ -22,8 +18,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        setContentView(binding.root)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         setupRv()
         loadingData()
@@ -46,8 +43,6 @@ class MainActivity : AppCompatActivity() {
 
             adapter = mAdapter
             setHasFixedSize(true)
-
-
         }
     }
 }

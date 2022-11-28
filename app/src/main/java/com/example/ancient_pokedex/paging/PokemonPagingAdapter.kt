@@ -31,6 +31,8 @@ class PokemonPagingAdapter : PagingDataAdapter<Result, PokemonViewHolder>(diffCa
         val currentItem = getItem(position)
         holder.binding.apply {
             textView.text = "${currentItem?.name}"
+
+
         }
     }
 

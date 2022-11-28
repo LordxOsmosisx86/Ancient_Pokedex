@@ -19,7 +19,7 @@ class PokemonPagingSource(private val service: PokemonService) : PagingSource<In
 
            LoadResult.Page(
                data = responseData,
-               prevKey = if(currentPage == 1) null else 1,
+               prevKey = if(currentPage == 0) null else 1,
                nextKey = nextPage
            )
        } catch (e: Exception) {
