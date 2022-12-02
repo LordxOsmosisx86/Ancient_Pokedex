@@ -1,9 +1,13 @@
 package com.example.ancient_pokedex.paging
 
 import android.net.Uri
+import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.ancient_pokedex.interfaces.PokemonService
+import com.example.ancient_pokedex.model.OfficialArtwork
+import com.example.ancient_pokedex.model.Pokemon
+import com.example.ancient_pokedex.model.PokemonData
 import com.example.ancient_pokedex.model.Result
 import java.net.URI
 
@@ -13,12 +17,20 @@ class PokemonPagingSource(private val service: PokemonService) : PagingSource<In
            val currentPage = params.key ?: 0
            val response = service.getNextPage(currentPage)
            val data = response.body()?.results ?: emptyList()
-           val responseData = mutableListOf<Result>()
-           val nextPage = Uri.parse(response.body()?.next).getQueryParameter("offset")?.toInt()
-           responseData.addAll(data)
+           var nextPage = Uri.parse(response.body()?.next).getQueryParameter("offset")?.toInt()
+           //Can probably change this when implementing room to grab table row value as the number for the pokemon.
+           for(item in data) {
+               val dexNum = Uri.parse(item.url).lastPathSegment?.toInt()!!
+               if(dexNum < 10000) {
+                   item.id = dexNum
+               } else {
+                   nextPage = null
+                   break
+               }
+           }
 
            LoadResult.Page(
-               data = responseData,
+               data = data,
                prevKey = if(currentPage == 0) null else 1,
                nextKey = nextPage
            )

@@ -14,7 +14,8 @@ import javax.inject.Inject
 @HiltViewModel()
 class PokemonViewModel
 @Inject constructor(private val pokemonService: PokemonService): ViewModel(){
-    val listData = Pager(PagingConfig(pageSize = 1)){
+    val listData = Pager(PagingConfig(pageSize = 10)){
         PokemonPagingSource(pokemonService)
     }.flow
+
 }

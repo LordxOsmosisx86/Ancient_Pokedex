@@ -29,10 +29,11 @@ class PokemonPagingAdapter : PagingDataAdapter<Result, PokemonViewHolder>(diffCa
 
     override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) {
         val currentItem = getItem(position)
-        holder.binding.apply {
-            textView.text = "${currentItem?.name}"
-
-
+        if(currentItem?.id != 0) {
+            holder.binding.apply {
+                pokedexNumber.text = "${currentItem?.id}"
+                pokemonName.text = "${currentItem?.name}"
+            }
         }
     }
 

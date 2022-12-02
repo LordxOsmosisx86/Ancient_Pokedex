@@ -1,5 +1,6 @@
 package com.example.ancient_pokedex.interfaces
 
+import com.example.ancient_pokedex.model.OfficialArtwork
 import com.example.ancient_pokedex.model.Pokemon
 import com.example.ancient_pokedex.model.PokemonData
 import com.example.ancient_pokedex.utils.Constants
@@ -18,4 +19,9 @@ interface PokemonService {
     suspend fun getPokemonData(
         @Path(value ="name") name:String
     ) : Response<PokemonData>
+
+    @GET("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{id}.png")
+    suspend fun getPokemonOfficialArtwork(
+        @Path(value = "id") id:Int
+    ) : Response<OfficialArtwork>
 }
