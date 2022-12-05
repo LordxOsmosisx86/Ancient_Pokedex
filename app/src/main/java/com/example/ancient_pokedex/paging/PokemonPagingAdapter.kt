@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ancient_pokedex.databinding.PokemonLayoutBinding
 import com.example.ancient_pokedex.model.Result
+import com.example.ancient_pokedex.utils.Constants
+import com.squareup.picasso.Picasso
 
 class PokemonPagingAdapter : PagingDataAdapter<Result, PokemonViewHolder>(diffCallback) {
 
@@ -32,7 +34,8 @@ class PokemonPagingAdapter : PagingDataAdapter<Result, PokemonViewHolder>(diffCa
         if(currentItem?.id != 0) {
             holder.binding.apply {
                 pokedexNumber.text = "${currentItem?.id}"
-                pokemonName.text = "${currentItem?.name}"
+                pokemonName.text = "${currentItem?.name?.replaceFirstChar { it.uppercase() }}"
+                Picasso.get().load(Constants.pokemonArtWorkURI+currentItem?.id.toString()+".png").into(pokemonOfficialArt)
             }
         }
     }
