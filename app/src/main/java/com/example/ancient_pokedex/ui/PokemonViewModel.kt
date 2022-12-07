@@ -1,5 +1,6 @@
 package com.example.ancient_pokedex.ui
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -17,5 +18,4 @@ class PokemonViewModel
     val listData = Pager(PagingConfig(pageSize = 10)){
         PokemonPagingSource(pokemonService)
     }.flow
-
 }
