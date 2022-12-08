@@ -1,19 +1,16 @@
 package com.example.ancient_pokedex.paging
 
-import android.speech.RecognitionListener
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.paging.PagingDataAdapter
 import com.example.ancient_pokedex.paging.PokemonPagingAdapter.*
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ancient_pokedex.MainActivity
 import com.example.ancient_pokedex.databinding.PokemonLayoutBinding
 import com.example.ancient_pokedex.interfaces.PokemonRecyclerViewInterface
-import com.example.ancient_pokedex.model.Result
+import com.example.ancient_pokedex.models.Result
 import com.example.ancient_pokedex.utils.Constants
 import com.squareup.picasso.Picasso
 

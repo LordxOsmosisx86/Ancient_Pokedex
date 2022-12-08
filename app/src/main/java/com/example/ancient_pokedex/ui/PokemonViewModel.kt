@@ -1,12 +1,11 @@
 package com.example.ancient_pokedex.ui
 
-import androidx.lifecycle.MutableLiveData
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
-import androidx.paging.cachedIn
+import com.example.ancient_pokedex.R
 import com.example.ancient_pokedex.paging.PokemonPagingSource
 import com.example.ancient_pokedex.interfaces.PokemonService
 import dagger.hilt.android.lifecycle.HiltViewModel
