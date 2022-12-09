@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import com.example.ancient_pokedex.R
 import com.example.ancient_pokedex.databinding.ActivityMainBinding
+import com.example.ancient_pokedex.interfaces.PokemonService
 import com.example.ancient_pokedex.ui.fragments.DexHomeFragment
 import com.example.ancient_pokedex.ui.fragments.PokemonPageFragment
 import dagger.hilt.android.AndroidEntryPoint

@@ -6,13 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.viewModelScope
-import com.example.ancient_pokedex.R
-import com.example.ancient_pokedex.databinding.FragmentDexHomeBinding
 import com.example.ancient_pokedex.databinding.FragmentPokemonPageBinding
+import com.example.ancient_pokedex.interfaces.PokemonService
+import com.example.ancient_pokedex.models.Pokemon
+import com.example.ancient_pokedex.models.PokemonData
 import com.example.ancient_pokedex.ui.PokemonViewModel
+import com.example.ancient_pokedex.utils.Constants
+import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.toList
+import retrofit2.Response
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -51,8 +53,13 @@ class PokemonPageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        loadSelectedPokemonData()
+    }
 
-        binding.pokemonInfoName.text = "Pokemon Info Coming Soon."
+    private fun loadSelectedPokemonData() {
+        //Todo: Add the rest of the field here and organize the view to be a bit nicer.
+        binding.pokemonInfoName.text = sharedPokemonViewMode.clickedPokemonData?.name
+        Picasso.get().load(Constants.pokemonArtWorkURI+sharedPokemonViewMode.clickedPokemonData?.id.toString()+".png").into(binding.pokemonOfficialArt)
     }
 
     companion object {
@@ -74,4 +81,5 @@ class PokemonPageFragment : Fragment() {
                 }
             }
     }
+
 }

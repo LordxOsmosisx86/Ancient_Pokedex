@@ -1,13 +1,11 @@
 package com.example.ancient_pokedex.ui
 
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModel
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
-import com.example.ancient_pokedex.R
 import com.example.ancient_pokedex.paging.PokemonPagingSource
 import com.example.ancient_pokedex.interfaces.PokemonService
+import com.example.ancient_pokedex.models.PokemonData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -17,4 +15,12 @@ class PokemonViewModel
     val listData = Pager(PagingConfig(pageSize = 10)){
         PokemonPagingSource(pokemonService)
     }.flow
+    var positionNum : String? = null
+    var clickedPokemonData : PokemonData? = null
+
+    suspend fun getPokemonData(pokemonID : Int) {
+        clickedPokemonData = pokemonService.getPokemonData(pokemonID.toString()).body()
+    }
+
+
 }
