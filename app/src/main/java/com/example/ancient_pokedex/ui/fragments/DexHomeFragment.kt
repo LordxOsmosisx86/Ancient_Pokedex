@@ -102,6 +102,7 @@ class DexHomeFragment() : Fragment(), PokemonRecyclerViewInterface {
         //TODO: Fix scope and make sure the next fragment doesn't launch until all the data is retrieved.
         GlobalScope.launch {
             sharedPokemonViewMode.getPokemonData(sharedPokemonViewMode.positionNum!!.toInt())
+            sharedPokemonViewMode.getPokemonSpeciesData(sharedPokemonViewMode.positionNum!!.toInt())
             (activity as MainActivity).replaceFragment(PokemonPageFragment())
         }
     }

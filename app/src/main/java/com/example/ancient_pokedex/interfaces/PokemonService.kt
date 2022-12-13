@@ -1,8 +1,8 @@
 package com.example.ancient_pokedex.interfaces
 
-import com.example.ancient_pokedex.models.OfficialArtwork
 import com.example.ancient_pokedex.models.Pokemon
 import com.example.ancient_pokedex.models.PokemonData
+import com.example.ancient_pokedex.models.PokemonSpeciesData
 import com.example.ancient_pokedex.utils.Constants
 import retrofit2.Response
 import retrofit2.http.GET
@@ -20,8 +20,8 @@ interface PokemonService {
         @Path(value ="name") name:String
     ) : Response<PokemonData>
 
-    @GET("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{id}.png")
-    suspend fun getPokemonOfficialArtwork(
-        @Path(value = "id") id:Int
-    ) : Response<OfficialArtwork>
+    @GET("pokemon-species/{id}")
+    suspend fun getPokemonSpeciesData(
+        @Path(value ="id") id:String
+    ) : Response<PokemonSpeciesData>
 }

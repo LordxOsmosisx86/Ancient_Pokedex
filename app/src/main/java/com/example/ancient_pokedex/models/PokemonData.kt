@@ -24,8 +24,6 @@ data class PokemonData(
     val pastTypes: List<Any>,
     @SerializedName("species")
     val species: Species,
-    @SerializedName("sprites")
-    val sprites: Sprites,
     @SerializedName("weight")
     val weight: Int
 )

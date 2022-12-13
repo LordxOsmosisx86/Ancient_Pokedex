@@ -31,34 +31,8 @@ class MainActivity : AppCompatActivity() {
      fun replaceFragment(fragment: Fragment) {
          val fragmentManager = supportFragmentManager
          val fragmentTransaction = fragmentManager.beginTransaction()
-         fragmentTransaction.replace(R.id.frameLayout, fragment)
+         fragmentTransaction.add(R.id.frameLayout, fragment)
          fragmentTransaction.addToBackStack(null)
          fragmentTransaction.commit()
     }
-
-    //TODO: Figure out how to properly switch out frags
-/*
-    private fun loadingData() {
-        lifecycleScope.launch{
-            viewModel.listData.collect{ pagingData->
-                pokemonAdapter.submitData(pagingData)
-            }
-        }
-    }
-
-    private fun setupRv(){
-        pokemonAdapter = PokemonPagingAdapter(this)
-        binding.recyclerView.apply {
-            layoutManager = StaggeredGridLayoutManager(
-                1, StaggeredGridLayoutManager.VERTICAL
-            )
-            adapter = pokemonAdapter
-            setHasFixedSize(true)
-        }
-    }
-
-    override fun onItemClicked(position: Int) {
-        Toast.makeText(this, "${pokemonAdapter.peek(position)?.name} clicked", Toast.LENGTH_SHORT).show()
-    }
-    */
 }
