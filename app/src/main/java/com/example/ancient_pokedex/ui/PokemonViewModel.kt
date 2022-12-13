@@ -1,5 +1,6 @@
 package com.example.ancient_pokedex.ui
 
+import android.util.Log
 import android.widget.Adapter
 import android.widget.ArrayAdapter
 import android.widget.ListView
@@ -13,6 +14,7 @@ import com.example.ancient_pokedex.models.PokemonData
 import com.example.ancient_pokedex.models.PokemonSpeciesData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+import kotlin.math.log
 
 @HiltViewModel()
 class PokemonViewModel
@@ -23,8 +25,7 @@ class PokemonViewModel
     var positionNum : String? = null
     var clickedPokemonData : PokemonData? = null
     var clickedPokemonSpeciesData : PokemonSpeciesData? = null
-    val eggGroup : Array<EggGroup>? = clickedPokemonSpeciesData?.eggGroups?.toTypedArray()
-
+    var eggGroup : Array<EggGroup>? = null
 
     suspend fun getPokemonData(pokemonID : Int) {
         clickedPokemonData = pokemonService.getPokemonData(pokemonID.toString()).body()
@@ -32,6 +33,9 @@ class PokemonViewModel
 
     suspend fun getPokemonSpeciesData(pokemonID : Int) {
         clickedPokemonSpeciesData = pokemonService.getPokemonSpeciesData(pokemonID.toString()).body()
+        eggGroup = clickedPokemonSpeciesData?.eggGroups?.toTypedArray()
+        Log.d("Hourani", "${eggGroup?.get(1)}: ")
+
     }
 
 }

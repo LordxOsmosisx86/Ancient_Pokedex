@@ -1,26 +1,23 @@
 package com.example.ancient_pokedex.ui.fragments
 
-import android.graphics.Color
+import android.R
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Adapter
 import android.widget.ArrayAdapter
-import android.widget.ListAdapter
 import android.widget.ListView
+import androidx.core.view.get
 import androidx.fragment.app.activityViewModels
 import com.example.ancient_pokedex.databinding.FragmentPokemonPageBinding
-import com.example.ancient_pokedex.interfaces.PokemonService
 import com.example.ancient_pokedex.models.EggGroup
-import com.example.ancient_pokedex.models.Pokemon
-import com.example.ancient_pokedex.models.PokemonData
 import com.example.ancient_pokedex.ui.PokemonViewModel
+import com.example.ancient_pokedex.ui.activities.MainActivity
 import com.example.ancient_pokedex.utils.Constants
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
-import retrofit2.Response
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -50,7 +47,8 @@ class PokemonPageFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentPokemonPageBinding.inflate(inflater, container, false)
@@ -64,11 +62,15 @@ class PokemonPageFragment : Fragment() {
 
     private fun loadSelectedPokemonData() {
         //Todo: Add the rest of the field here and organize the view to be a bit nicer.
+        //Log.d("Hourani", "Here is the viewID: ${} ")
+        val listView = binding.pkmEggGroup
+        val adapter : ArrayAdapter<EggGroup> = ArrayAdapter(activity!!.applicationContext, android.R.layout.simple_list_item_1, sharedPokemonViewMode.eggGroup!!)
         Picasso.get().load(Constants.pokemonArtWorkURI+sharedPokemonViewMode.clickedPokemonData?.id.toString()+".png").into(binding.pokemonOfficialArt)
         binding.pokemonInfoName.text = sharedPokemonViewMode.clickedPokemonData?.name
         binding.baseHappiness.text = sharedPokemonViewMode.clickedPokemonSpeciesData?.baseHappiness.toString()
         binding.captureRate.text = sharedPokemonViewMode.clickedPokemonSpeciesData?.captureRate.toString()
         binding.pkmColor.text = sharedPokemonViewMode.clickedPokemonSpeciesData?.color?.name.toString()
+        listView.adapter = adapter
 
 
     }
