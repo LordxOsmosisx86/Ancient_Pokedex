@@ -4,7 +4,7 @@ import android.net.Uri
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.ancient_pokedex.interfaces.PokemonService
-import com.example.ancient_pokedex.models.Result
+import com.example.ancient_pokedex.models.Pokemon.*
 
 class PokemonPagingSource(private val service: PokemonService) : PagingSource<Int, Result>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Result> {

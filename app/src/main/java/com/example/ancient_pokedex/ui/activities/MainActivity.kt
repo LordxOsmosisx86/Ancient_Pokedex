@@ -23,14 +23,5 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        replaceFragment(dexHomeFragment)
-    }
-
-     fun replaceFragment(fragment: Fragment) {
-         val fragmentManager = supportFragmentManager
-         val fragmentTransaction = fragmentManager.beginTransaction()
-         fragmentTransaction.add(R.id.frameLayout, fragment)
-         fragmentTransaction.addToBackStack(null)
-         fragmentTransaction.commit()
     }
 }

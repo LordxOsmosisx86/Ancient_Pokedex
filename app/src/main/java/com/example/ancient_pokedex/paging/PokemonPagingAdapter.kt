@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ancient_pokedex.databinding.PokemonLayoutBinding
 import com.example.ancient_pokedex.interfaces.PokemonRecyclerViewInterface
-import com.example.ancient_pokedex.models.Result
+import com.example.ancient_pokedex.models.Pokemon.*
 import com.example.ancient_pokedex.utils.Constants
 import com.squareup.picasso.Picasso
 

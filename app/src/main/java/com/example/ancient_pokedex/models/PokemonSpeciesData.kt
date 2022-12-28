@@ -15,7 +15,7 @@ data class PokemonSpeciesData(
     @SerializedName("evolution_chain")
     val evolutionChain: EvolutionChain,
     @SerializedName("evolves_from_species")
-    val evolvesFromSpecies: Any,
+    val evolvesFromSpecies: EvolvesFromSpecies,
     @SerializedName("flavor_text_entries")
     val flavorTextEntries: List<FlavorTextEntry>,
     @SerializedName("form_descriptions")
@@ -58,4 +58,153 @@ data class PokemonSpeciesData(
     val shape: Shape,
     @SerializedName("varieties")
     val varieties: List<Variety>
-)
+) {
+    data class Color(
+        @SerializedName("name")
+        val name: String,
+        @SerializedName("url")
+        val url: String
+    )
+
+    data class EggGroup(
+        @SerializedName("name")
+        val name: String,
+        @SerializedName("url")
+        val url: String
+    )
+
+    data class EvolutionChain(
+        @SerializedName("url")
+        val url: String
+    )
+
+    data class EvolvesFromSpecies(
+        @SerializedName("name")
+        val name: String,
+        @SerializedName("url")
+        val url: String
+    )
+
+    data class FlavorTextEntry(
+        @SerializedName("flavor_text")
+        val flavorText: String,
+        @SerializedName("language")
+        val language: Language,
+        @SerializedName("version")
+        val version: Version
+    ) {
+        data class Language(
+            @SerializedName("name")
+            val name: String,
+            @SerializedName("url")
+            val url: String
+        )
+
+        data class Version(
+            @SerializedName("name")
+            val name: String,
+            @SerializedName("url")
+            val url: String
+        )
+    }
+
+    data class Genera(
+        @SerializedName("genus")
+        val genus: String,
+        @SerializedName("language")
+        val language: Language
+    ) {
+        data class Language(
+            @SerializedName("name")
+            val name: String,
+            @SerializedName("url")
+            val url: String
+        )
+    }
+
+    data class Generation(
+        @SerializedName("name")
+        val name: String,
+        @SerializedName("url")
+        val url: String
+    )
+
+    data class GrowthRate(
+        @SerializedName("name")
+        val name: String,
+        @SerializedName("url")
+        val url: String
+    )
+
+    data class Habitat(
+        @SerializedName("name")
+        val name: String,
+        @SerializedName("url")
+        val url: String
+    )
+
+    data class Name(
+        @SerializedName("language")
+        val language: Language,
+        @SerializedName("name")
+        val name: String
+    ) {
+        data class Language(
+            @SerializedName("name")
+            val name: String,
+            @SerializedName("url")
+            val url: String
+        )
+    }
+
+    data class PalParkEncounter(
+        @SerializedName("area")
+        val area: Area,
+        @SerializedName("base_score")
+        val baseScore: Int,
+        @SerializedName("rate")
+        val rate: Int
+    ) {
+        data class Area(
+            @SerializedName("name")
+            val name: String,
+            @SerializedName("url")
+            val url: String
+        )
+    }
+
+    data class PokedexNumber(
+        @SerializedName("entry_number")
+        val entryNumber: Int,
+        @SerializedName("pokedex")
+        val pokedex: Pokedex
+    ) {
+        data class Pokedex(
+            @SerializedName("name")
+            val name: String,
+            @SerializedName("url")
+            val url: String
+        )
+    }
+
+    data class Shape(
+        @SerializedName("name")
+        val name: String,
+        @SerializedName("url")
+        val url: String
+    )
+
+    data class Variety(
+        @SerializedName("is_default")
+        val isDefault: Boolean,
+        @SerializedName("pokemon")
+        val pokemon: Pokemon
+    ) {
+        data class Pokemon(
+            @SerializedName("name")
+            val name: String,
+            @SerializedName("url")
+            val url: String
+        )
+    }
+}

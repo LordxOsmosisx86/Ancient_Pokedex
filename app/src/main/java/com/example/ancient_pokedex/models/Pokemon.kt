@@ -12,4 +12,12 @@ data class Pokemon(
     val previous: Any,
     @SerializedName("results")
     val results: List<Result>
-)
+) {
+    data class Result(
+        var id: Int,
+        @SerializedName("name")
+        val name: String,
+        @SerializedName("url")
+        val url: String
+    )
+}
