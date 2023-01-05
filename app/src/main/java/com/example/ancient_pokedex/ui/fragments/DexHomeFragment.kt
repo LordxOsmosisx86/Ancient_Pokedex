@@ -1,5 +1,6 @@
 package com.example.ancient_pokedex.ui.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -21,7 +22,7 @@ import com.example.ancient_pokedex.ui.viewmodel.PokemonViewModel
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.*
 
-class DexHomeFragment() : Fragment(R.layout.fragment_dex_home), PokemonRecyclerViewInterface {
+class DexHomeFragment : Fragment(R.layout.fragment_dex_home), PokemonRecyclerViewInterface {
     private val sharedPokemonViewModel: PokemonViewModel by activityViewModels()
     private var _binding: FragmentDexHomeBinding? = null
     private val binding get() = _binding!!
@@ -55,7 +56,6 @@ class DexHomeFragment() : Fragment(R.layout.fragment_dex_home), PokemonRecyclerV
     private fun setupRv() {
         pokemonAdapter = PokemonPagingAdapter(this)
         binding.recyclerView.apply {
-            Log.d("Hello", "In binding")
             layoutManager = StaggeredGridLayoutManager(
                 1, StaggeredGridLayoutManager.VERTICAL
             )
@@ -64,13 +64,9 @@ class DexHomeFragment() : Fragment(R.layout.fragment_dex_home), PokemonRecyclerV
         }
     }
 
-
     override fun onItemClicked(position: Int) {
         val selectedPokemon = pokemonAdapter.peek(position)?.name.toString()
-        lifecycleScope.launch {
-            sharedPokemonViewModel.getSelectedPokemonInfo(selectedPokemon)
-            sharedPokemonViewModel.getSelectedPokemonSpeciesInfo(selectedPokemon)
-            findNavController().navigate(R.id.action_dexHomeFragment_to_pokemonPageFragment)
-        }
+        sharedPokemonViewModel.getPokemonData(selectedPokemon)
+        findNavController().navigate(R.id.action_dexHomeFragment_to_pokemonPageFragment)
     }
 }

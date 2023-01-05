@@ -1,5 +1,6 @@
 package com.example.ancient_pokedex.interfaces
 
+import androidx.lifecycle.MutableLiveData
 import com.example.ancient_pokedex.models.Pokemon
 import com.example.ancient_pokedex.models.PokemonData
 import com.example.ancient_pokedex.models.PokemonSpeciesData
